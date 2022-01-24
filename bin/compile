@@ -17,6 +17,9 @@ ARCH="x86_64"
 : "${SOPS_VERSION:=3.7.1}"
 : "${STERN_VERSION:=1.11.0}"
 
+# Only works on Ubuntu. Script might need to be updated to support multiple OS types if we decide to switch.
+apt-get update
+
 install_jq () {
   JQ_URL="https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-${OS}64"
   JQ_PATH="${VENDOR_DIR}/jq"
@@ -57,11 +60,16 @@ install_stern () {
   chmod +x "${STERN_PATH}"
 }
 
+install_envsubst () {
+  apt-get -y install gettext-base
+}
+
 install_jq
 install_yq
 install_rage
 install_sops
 install_stern
+install_envsubst
 
 echo "-----> Writing .profile.d script"
 PROFILE_DIR="${BUILD_DIR}/.profile.d"
