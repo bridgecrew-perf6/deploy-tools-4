@@ -7,4 +7,4 @@ This repository provides a Heroku buildpack containing the following tools:
 - [rage](https://github.com/str4d/rage)
 - [sops](https://github.com/mozilla/sops/)
 - [stern](https://github.com/wercker/stern)
-- [envsubst](https://launchpad.net/ubuntu/trusty/+package/gettext-base)
+- [envsubst](https://github.com/a8m/envsubst)
