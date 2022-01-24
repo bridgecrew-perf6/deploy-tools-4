@@ -16,9 +16,7 @@ ARCH="x86_64"
 : "${RAGE_VERSION:=0.7.1}"
 : "${SOPS_VERSION:=3.7.1}"
 : "${STERN_VERSION:=1.11.0}"
-
-# Only works on Ubuntu. Script might need to be updated to support multiple OS types if we decide to switch.
-apt-get update
+: "${ENVSUBST_VERSION:=1.2.0}"
 
 install_jq () {
   JQ_URL="https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-${OS}64"
@@ -61,7 +59,11 @@ install_stern () {
 }
 
 install_envsubst () {
-  apt-get -y install gettext-base
+  ENVSUBST_URL="https://github.com/a8m/envsubst/releases/download/v${ENVSUBST_VERSION}/envsubst-Linux-${ARCH}"
+  ENVSUBST_PATH="${VENDOR_DIR}/envsubst"
+
+  curl --fail --show-error --silent --location "${ENVSUBST_URL}" --output "${ENVSUBST_PATH}"
+  chmod +x "${ENVSUBST_PATH}"
 }
 
 install_jq
