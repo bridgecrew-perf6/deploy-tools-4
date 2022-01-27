@@ -17,6 +17,7 @@ ARCH="x86_64"
 : "${SOPS_VERSION:=3.7.1}"
 : "${STERN_VERSION:=1.11.0}"
 : "${ENVSUBST_VERSION:=1.2.0}"
+: "${KUSTOMIZE_VERSION:=4.4.1}"
 
 install_jq () {
   JQ_URL="https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-${OS}64"
@@ -66,12 +67,21 @@ install_envsubst () {
   chmod +x "${ENVSUBST_PATH}"
 }
 
+install_kustomize () {
+  KUSTOMIZE_URL="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${OS}_amd64.tar.gz"
+  KUSTOMIZE_TAR="${CACHE_DIR}/kustomize-v${KUSTOMIZE_VERSION}-${ARCH}-${OS}.tar.gz"
+
+  curl --fail --show-error --silent --location "${KUSTOMIZE_URL}" --output "${KUSTOMIZE_TAR}"
+  tar --strip-components 1 --extract --gzip --file "${KUSTOMIZE_TAR}" --directory "${VENDOR_DIR}"
+}
+
 install_jq
 install_yq
 install_rage
 install_sops
 install_stern
 install_envsubst
+install_kustomize
 
 echo "-----> Writing .profile.d script"
 PROFILE_DIR="${BUILD_DIR}/.profile.d"
