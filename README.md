@@ -8,3 +8,4 @@ This repository provides a Heroku buildpack containing the following tools:
 - [sops](https://github.com/mozilla/sops/)
 - [stern](https://github.com/wercker/stern)
 - [envsubst](https://github.com/a8m/envsubst)
+- [kustomize](https://github.com/kubernetes-sigs/kustomize)
