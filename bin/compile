@@ -72,7 +72,7 @@ install_kustomize () {
   KUSTOMIZE_TAR="${CACHE_DIR}/kustomize-v${KUSTOMIZE_VERSION}-${ARCH}-${OS}.tar.gz"
 
   curl --fail --show-error --silent --location "${KUSTOMIZE_URL}" --output "${KUSTOMIZE_TAR}"
-  tar --strip-components 1 --extract --gzip --file "${KUSTOMIZE_TAR}" --directory "${VENDOR_DIR}"
+  tar --extract --gzip --file "${KUSTOMIZE_TAR}" --directory "${VENDOR_DIR}"
 }
 
 install_jq
